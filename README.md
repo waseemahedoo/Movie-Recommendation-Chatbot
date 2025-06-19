@@ -1,6 +1,6 @@
 # 🎬 Movie Recommender Chatbot
 
-A conversational movie recommender system that combines **SentenceTransformer embeddings**, **LLM-powered query rewriting**, and a **Streamlit chatbot interface** to provide relevant movie suggestions — based on user intent, mood, and multi-turn queries.
+A conversational movie recommender system that combines **SentenceTransformer embeddings**, **LLM-powered query rewriting**, and a **Streamlit chatbot interface** to provide relevant movie suggestions based on user intent.
 
 > 🧠 Powered by Mistral-7B-Instruct (via `transformers`) + `intfloat/e5-base` for semantic similarity
 
@@ -48,3 +48,44 @@ Her — A man falls in love with an AI operating system.
 The Circle — A woman joins a tech giant with hidden motives.
 
 Searching — A father uncovers secrets online while looking for his missing daughter.
+
+## Installation
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/yourusername/movie-recommender-chatbot.git
+cd movie-recommender-chatbot
+```
+
+### 2. Set Up a Virtual Environment
+
+```bash
+conda create -n moviebot python=3.10
+conda activate moviebot
+```
+### 3. Install requirements
+
+```bash
+pip install -r requirements.txt
+```
+
+## Setup & Run
+
+### 1. Generate Embeddings (one-time)
+
+Use the provided notebook to embed movie descriptions using `intfloat/e5-base`.
+
+```bash
+jupyter notebook notebooks/generate_embeddings.ipynb
+```
+### 2. Download and Set Up the LLM (Mistral)
+
+```bash
+python download.py
+```
+### 3. Run the Streamlit App
+
+```bash
+python run app.py
+```
