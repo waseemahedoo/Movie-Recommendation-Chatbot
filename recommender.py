@@ -1,6 +1,7 @@
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 
+
 class MovieRecommender:
     def __init__(self, df_movies, embeddings):
         self.df = df_movies
