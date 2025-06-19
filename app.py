@@ -24,7 +24,7 @@ recommender = MovieRecommender(df_movies, embeddings)
 
 # Streamlit UI
 st.set_page_config(page_title="Movie Recommender", page_icon="🎬")
-st.title("🎬 LLaMA Movie Recommender Chatbot")
+st.title("🎬 Movie Recommender Chatbot")
 
 print("✅ App started")
 
@@ -33,7 +33,7 @@ if "chat_history" not in st.session_state:
     print("✅ Chat history initialized")
 
 
-user_input = st.chat_input("What kind of movie are you looking for?")
+user_input = st.chat_input("What kind of movie plot are you looking for?")
 
 if user_input:
     print(f"📝 User input: {user_input}")

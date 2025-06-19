@@ -1,28 +1,56 @@
-from transformers import pipeline
+from transformers import pipeline, AutoTokenizer, AutoModelForCausalLM
 import torch
+torch.classes.__path__ = []
+from dotenv import load_dotenv
+import os
 
-# Load LLaMA 3.1 Instruct model
-llama_pipeline = pipeline(
-    "text-generation",
-    model="TinyLlama/TinyLlama-1.1B-Chat-v1.0",
-    model_kwargs={"torch_dtype": torch.bfloat16},
+load_dotenv() 
+
+
+model_path = os.getenv('MODEL_PATH')
+
+tokenizer = AutoTokenizer.from_pretrained(model_path)
+
+model = AutoModelForCausalLM.from_pretrained(
+    model_path,
+    torch_dtype="auto",  # or float16 / float32 based on device
     device_map="auto"
+)
+
+llm = pipeline(
+    "text-generation",
+    model=model,
+    tokenizer = tokenizer
 )
 
 def rewrite_query_with_llama(chat_history):
     prompt = (
-        "You are an intelligent assistant for a movie recommendation chatbot.\n"
-        "Given the conversation below, rewrite the latest user message as a standalone movie search query.\n"
-        "The rewritten query should resemble a query to match a movie description. For example if you have as raw query 'Give me a romantic movie with a twist', the rewritten query should highlight clearly the plot that the user want to watch.\n"
-        "If the query is unrelated to finding movies (e.g., asking for trailers or directors), summarize that as a separate intent.\n\n"
-        "Conversation:\n"
-    )
+    "You are an intelligent assistant inside a movie recommendation chatbot.\n"
+    "Your task is to rewrite the latest user message as a clean, standalone movie search query.\n\n"
+    "Guidelines:\n"
+    "- The query must describe the type of movie the user wants to watch.\n"
+    "- Use concrete themes, tone, genre, and any emotions or twists mentioned.\n"
+    "- DO NOT just repeat 'romantic movie'. Be descriptive and specific.\n"
+    "- If the user is vague, combine their last few inputs to infer what they mean.\n"
+    "- If the user asks for something other than a movie (e.g., trailer, actor), return:\n"
+    "  [non-search intent: user asked for a trailer]\n\n"
+    "Examples:\n"
+    "User: I want something emotional and powerful.\n"
+    "Rewritten: emotional drama about overcoming trauma or loss\n\n"
+    "User: It's raining, give me a movie with a twist.\n"
+    "Rewritten: romantic movie set during rain with an unexpected twist\n\n"
+    "User: Can you show me a trailer?\n"
+    "Rewritten: [non-search intent: user asked for a trailer]\n\n"
+    "User: I want something fun, maybe friends or college.\n"
+    "Rewritten: lighthearted comedy about friendship and college life\n\n"
+    "Conversation:\n"
+)
     for msg in chat_history:
         prompt += f"User: {msg}\n"
 
     prompt += "\nRewrite the user's intent:\n"
 
-    output = llama_pipeline(
+    output = llm(
         prompt,
         max_new_tokens=50,
         do_sample=True,
@@ -33,3 +61,4 @@ def rewrite_query_with_llama(chat_history):
     rewritten = output[0]["generated_text"].strip()
     print("🧠 Rewritten query:", rewritten)
     return rewritten
+

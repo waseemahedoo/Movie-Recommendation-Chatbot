@@ -72,19 +72,12 @@ pip install -r requirements.txt
 
 ## Setup & Run
 
-### 1. Generate Embeddings (one-time)
-
-Use the provided notebook to embed movie descriptions using `intfloat/e5-base`.
-
-```bash
-jupyter notebook notebooks/generate_embeddings.ipynb
-```
-### 2. Download and Set Up the LLM (Mistral)
+### 1. Download and Set Up the LLM (Mistral)
 
 ```bash
 python download.py
 ```
-### 3. Run the Streamlit App
+### 2. Run the Streamlit App
 
 ```bash
 python run app.py
