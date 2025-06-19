@@ -35,3 +35,16 @@ A conversational movie recommender system that combines **SentenceTransformer em
 
 ## 💡 Example Interaction
 
+User: I want a romantic movie with a twist
+
+User: Something involving social media
+
+🧠 Rewritten Query: romantic movie with a twist involving social media
+
+🎬 Recommended Movies:
+
+Her — A man falls in love with an AI operating system.
+
+The Circle — A woman joins a tech giant with hidden motives.
+
+Searching — A father uncovers secrets online while looking for his missing daughter.
