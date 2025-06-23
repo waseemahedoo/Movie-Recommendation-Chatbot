@@ -1,28 +1,28 @@
-# 🎬 Movie Recommender Chatbot
+# Movie Recommender Chatbot
 
 A conversational movie recommender system that combines **SentenceTransformer embeddings**, **LLM-powered query rewriting**, and a **Streamlit chatbot interface** to provide relevant movie suggestions based on user intent.
 
-> 🧠 Powered by Mistral-7B-Instruct (via `transformers`) + `intfloat/e5-base` for semantic similarity
+> Powered by Mistral-7B-Instruct (via `transformers`) + `intfloat/e5-base` for semantic similarity
 
 ---
 
-## 🛠️ Features
+## Features
 
-- ✅ **LLM-based query understanding**  
+-  **LLM-based query understanding**  
   Uses Mistral 7B to rewrite vague or complex user messages into focused movie search queries.
 
-- ✅ **Semantic search with vector embeddings**  
+-  **Semantic search with vector embeddings**  
   Movie descriptions are embedded using `intfloat/e5-base` and compared to user intent via cosine similarity.
 
-- ✅ **Multi-turn conversation awareness**  
+-  **Multi-turn conversation awareness**  
   The chatbot remembers recent user queries and rewrites them in context (e.g. "I want something sad but inspiring").
 
-- ✅ **Streamlit chatbot UI**  
+-  **Streamlit chatbot UI**  
   Clean and interactive front-end to simulate a real-time recommendation dialogue.
 
 ---
 
-## 🚀 Tech Stack
+##  Tech Stack
 
 | Component     | Tool                                      |
 |---------------|-------------------------------------------|
@@ -33,15 +33,15 @@ A conversational movie recommender system that combines **SentenceTransformer em
 
 ---
 
-## 💡 Example Interaction
+## Example Interaction
 
 User: I want a romantic movie with a twist
 
 User: Something involving social media
 
-🧠 Rewritten Query: romantic movie with a twist involving social media
+Rewritten Query: romantic movie with a twist involving social media
 
-🎬 Recommended Movies:
+Recommended Movies:
 
 Her — A man falls in love with an AI operating system.
 
